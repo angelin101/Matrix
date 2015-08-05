@@ -1,6 +1,6 @@
 package matrix;
 
-import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Created by јнгелин on 04.08.2015.
@@ -67,7 +67,8 @@ public class Matrix {
     // метод принимает матрицу и складывает две матрицы!
     public void sumMatrix(Matrix matrixObj){
         if (matrixObj.line != line || matrixObj.column != column){
-            throw new IndexOutOfBoundsException("ћатрицы разных размеров!");
+            System.err.println("ћатрицы разных размеров!");
+            return;
         }
         for (int n = 0; n < column; n++){
             for (int m = 0; m < line; m++){
@@ -88,7 +89,7 @@ public class Matrix {
     // метод принимает матрицу и перемножает две матрицы!!!*
    /* public void multiplicationByMatrix(Matrix matrixObj){
         if (this.column != matrixObj.line){
-            throw new IndexOutOfBoundsException("Ќе выполн€ютс€ услови€ перемножени€ матриц!+\n
+            System.err.println("Ќе выполн€ютс€ услови€ перемножени€ матриц!+\n
                  оличество столбцов первой матрицы не равно количеству строк второй матрицы!!!");
         }
         double[][] newMatrix = new double[line][matrixObj.column];
