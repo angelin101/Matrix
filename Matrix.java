@@ -10,7 +10,6 @@ public class Matrix {
     private int line;// строки
     private int column;// столбцы
     
-    // Заполнить рандомно
     public Matrix(){
         line = 3;
         column = 3;
@@ -53,7 +52,7 @@ public class Matrix {
         this.matrix = matrix;
     }
 
-    //метод заполняет пустой двумерный массив рандомными значениями (создает матрицу)!!!!!
+    //метод заполняет пустой двумерный массив рандомными значениями (создает матрицу)!
     // private только для вызова с класса
     private void createMatrix(double[][] matrix){
         Random random = new Random();
@@ -87,17 +86,24 @@ public class Matrix {
     }
 
     // метод принимает матрицу и перемножает две матрицы!!!*
-   /* public void multiplicationByMatrix(Matrix matrixObj){
+    public void multiplicationByMatrix(Matrix matrixObj){
         if (this.column != matrixObj.line){
             System.err.println("Не выполняются условия перемножения матриц!+\n
                 Количество столбцов первой матрицы не равно количеству строк второй матрицы!!!");
+            return;    
         }
-        double[][] newMatrix = new double[line][matrixObj.column];
+        double[][] newMatrix = new double[matrixObj.column][line];
         for (int n = 0; n < newMatrix.column; n++) {
             for (int m = 0; m < newMatrix.line; m++) {
-                newMatrix[m][n] = 
+                for (int i = 0; i < column; i++) {
+                    newMatrix[n][m] += matrix[i][m] * matrixObj.matrix[n][i];    
+                } 
+            }
         }
-    }*/
+        matrix = newMatrix;
+        column = newMatrix.length;
+        line = newMatrix[line].length;
+    }
 
     // метод транспонирует матрицу!!!*
     public void transpose(){
