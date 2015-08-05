@@ -88,13 +88,12 @@ public class Matrix {
     // метод принимает матрицу и перемножает две матрицы!!!*
     public void multiplicationByMatrix(Matrix matrixObj){
         if (this.column != matrixObj.line){
-            System.err.println("Не выполняются условия перемножения матриц!+\n
-                Количество столбцов первой матрицы не равно количеству строк второй матрицы!!!");
+            System.err.println("Не выполняются условия перемножения матриц!+\nКоличество столбцов первой матрицы не равно количеству строк второй матрицы!!!");
             return;    
         }
         double[][] newMatrix = new double[matrixObj.column][line];
-        for (int n = 0; n < newMatrix.column; n++) {
-            for (int m = 0; m < newMatrix.line; m++) {
+        for (int n = 0; n < matrixObj.column; n++) {
+            for (int m = 0; m < line; m++) {
                 for (int i = 0; i < column; i++) {
                     newMatrix[n][m] += matrix[i][m] * matrixObj.matrix[n][i];    
                 } 
