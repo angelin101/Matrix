@@ -3,28 +3,28 @@ package matrix;
 import java.util.Random;
 
 /**
- * Created by Ангелин on 04.08.2015.
+ * Created by РђРЅРіРµР»РёРЅ on 04.08.2015.
  */
 public class Matrix {
     private double[][] matrix;
-    private int line;// строки
-    private int column;// столбцы
-    
+    private int line;// СЃС‚СЂРѕРєРё
+    private int column;// СЃС‚РѕР»Р±С†С‹
+
     public Matrix(){
         line = 3;
         column = 3;
-        matrix = new double[column][line];
+        matrix = new double[line][column];
         createMatrix(matrix);
     }
     public Matrix(int line, int column){
         this.line = line;
         this.column = column;
-        matrix = new double[column][line];
+        matrix = new double[line][column];
         createMatrix(matrix);
     }
     public Matrix(double[][] matrix){
-        column = matrix.length;
-        line = matrix[line].length;
+        line = matrix.length;
+        column = matrix[column].length;
         this.matrix = matrix;
     }
     public Matrix(Matrix matrixObj){
@@ -52,72 +52,71 @@ public class Matrix {
         this.matrix = matrix;
     }
 
-    //метод заполняет пустой двумерный массив рандомными значениями (создает матрицу)!
-    // private только для вызова с класса
+    //РјРµС‚РѕРґ Р·Р°РїРѕР»РЅСЏРµС‚ РїСѓСЃС‚РѕР№ РґРІСѓРјРµСЂРЅС‹Р№ РјР°СЃСЃРёРІ СЂР°РЅРґРѕРјРЅС‹РјРё Р·РЅР°С‡РµРЅРёСЏРјРё (СЃРѕР·РґР°РµС‚ РјР°С‚СЂРёС†Сѓ)!
+    // private С‚РѕР»СЊРєРѕ РґР»СЏ РІС‹Р·РѕРІР° СЃ РєР»Р°СЃСЃР°
     private void createMatrix(double[][] matrix){
         Random random = new Random();
-        for (int n = 0; n < column; n++) {
-            for (int m = 0; m < line; m++) {
-                matrix[n][m] = random.nextDouble()*100;      
-            }                
-        }            
+        for (int n = 0; n < line; n++) {
+            for (int m = 0; m < column; m++) {
+                matrix[n][m] = random.nextDouble()*100;
+            }
+        }
     }
 
-    // метод принимает матрицу и складывает две матрицы!
+    // РјРµС‚РѕРґ РїСЂРёРЅРёРјР°РµС‚ РјР°С‚СЂРёС†Сѓ Рё СЃРєР»Р°РґС‹РІР°РµС‚ РґРІРµ РјР°С‚СЂРёС†С‹!
     public void sumMatrix(Matrix matrixObj){
         if (matrixObj.line != line || matrixObj.column != column){
-            System.err.println("Матрицы разных размеров!");
+            System.err.println("РњР°С‚СЂРёС†С‹ СЂР°Р·РЅС‹С… СЂР°Р·РјРµСЂРѕРІ!");
             return;
         }
-        for (int n = 0; n < column; n++){
-            for (int m = 0; m < line; m++){
+        for (int n = 0; n < line; n++){
+            for (int m = 0; m < column; m++){
                 matrix[n][m] += matrixObj.matrix[n][m];
             }
         }
     }
 
-    // метод принимает число и умножает его на матрицу
-    public void multiplicationByNumber(int number){
-        for (int n = 0; n < column; n++) {
-            for (int m = 0; m < line; m++) {
-                matrix[n][m] *= number;      
-            }                
-        }            
+    // РјРµС‚РѕРґ РїСЂРёРЅРёРјР°РµС‚ С‡РёСЃР»Рѕ Рё СѓРјРЅРѕР¶Р°РµС‚ РµРіРѕ РЅР° РјР°С‚СЂРёС†Сѓ
+    public void multiplyByNumber(int number){
+        for (int n = 0; n < line; n++) {
+            for (int m = 0; m < column; m++) {
+                matrix[n][m] *= number;
+            }
+        }
     }
 
-    // метод принимает матрицу и перемножает две матрицы!!!*
-    public void multiplicationByMatrix(Matrix matrixObj){
+    // РјРµС‚РѕРґ РїСЂРёРЅРёРјР°РµС‚ РјР°С‚СЂРёС†Сѓ Рё РїРµСЂРµРјРЅРѕР¶Р°РµС‚ РґРІРµ РјР°С‚СЂРёС†С‹!!!
+    public void multiplyByMatrix(Matrix matrixObj){
         if (this.column != matrixObj.line){
-            System.err.println("Не выполняются условия перемножения матриц!+\nКоличество столбцов первой матрицы не равно количеству строк второй матрицы!!!");
-            return;    
+            System.err.println("РќРµ РІС‹РїРѕР»РЅСЏСЋС‚СЃСЏ СѓСЃР»РѕРІРёСЏ РїРµСЂРµРјРЅРѕР¶РµРЅРёСЏ РјР°С‚СЂРёС†!\nРљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ РїРµСЂРІРѕР№ РјР°С‚СЂРёС†С‹ РЅРµ СЂР°РІРЅРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ СЃС‚СЂРѕРє РІС‚РѕСЂРѕР№ РјР°С‚СЂРёС†С‹!!!");
+            return;
         }
-        double[][] newMatrix = new double[matrixObj.column][line];
-        for (int n = 0; n < matrixObj.column; n++) {
-            for (int m = 0; m < line; m++) {
+        double[][] newMatrix = new double[line][matrixObj.column];
+        for (int n = 0; n < line; n++) {
+            for (int m = 0; m < matrixObj.column; m++) {
                 for (int i = 0; i < column; i++) {
-                    newMatrix[n][m] += matrix[i][m] * matrixObj.matrix[n][i];    
-                } 
+                    newMatrix[n][m] += matrix[n][i] * matrixObj.matrix[i][m];
+                }
             }
         }
         matrix = newMatrix;
-        column = newMatrix.length;
-        line = newMatrix[line].length;
+        column = matrixObj.column;
     }
 
-    // метод транспонирует матрицу!!!*
+    // РјРµС‚РѕРґ С‚СЂР°РЅСЃРїРѕРЅРёСЂСѓРµС‚ РјР°С‚СЂРёС†Сѓ!!!
     public void transpose(){
-        double[][] newMatrix = new double[line][column];
-        for (int n = 0; n < newMatrix.length; n++) {
-            for (int m = 0; m < newMatrix[line].length; m++) {
-                newMatrix[n][m] = matrix[m][n];      
-            }                
+        double[][] newMatrix = new double[column][line];
+        for (int n = 0; n < column; n++) {
+            for (int m = 0; m < line; m++) {
+                newMatrix[n][m] = matrix[m][n];
+            }
         }
         matrix = newMatrix;
-        column = newMatrix.length;
-        line = newMatrix[line].length;            
+        column = line;
+        line = newMatrix.length;
     }
 
-    // метод выводит матрицу на экран
+    // РјРµС‚РѕРґ РІС‹РІРѕРґРёС‚ РјР°С‚СЂРёС†Сѓ РЅР° СЌРєСЂР°РЅ
     public void printMatrix(){
         System.out.println("Line - "+line+" Column - "+column);
         for (double[] a : matrix){
@@ -129,4 +128,5 @@ public class Matrix {
         }
     }
 }
+
 
